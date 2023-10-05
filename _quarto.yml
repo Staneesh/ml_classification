@@ -1,0 +1,14 @@
+project:
+  title: "Machine Learning in Finance II: Classification"
+  output-dir: _output
+    
+toc: true
+
+format:
+  html:
+    smooth-scroll: true
+
+
+
+
+
