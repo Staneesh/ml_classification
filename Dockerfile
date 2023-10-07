@@ -8,6 +8,6 @@ RUN apt-get update && apt-get install -y \
 
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
-# RUN pip freeze > requirements.txt
-# RUN cat requirements.txt
+RUN pip freeze > requirements.txt
+RUN cat requirements.txt
 
