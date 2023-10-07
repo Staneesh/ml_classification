@@ -1,6 +1,6 @@
 project:
   title: "Machine Learning in Finance II: Classification"
-  output-dir: _output
+  output-dir: output
     
 toc: true
 

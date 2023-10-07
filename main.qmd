@@ -1,0 +1,12 @@
+---
+title: dupa
+---
+
+```{python}
+import numpy
+a = 5
+```
+
+dupa dupa 
+
+## ddupa 

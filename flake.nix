@@ -1,42 +1,34 @@
 {
-    description = "Machine Learning in Finance II Project on Classification";
+  description = "Application packaged using poetry2nix";
 
-    inputs = {
-        nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
-    };
-    outputs = { self, nixpkgs }:
-    let 
-        system = "x86_64-linux"; 
-        pkgs = (import nixpkgs) { inherit system; };
-    in
-    {
-        devShells.${system}.default = pkgs.mkShell {
-            buildInputs = with pkgs; [
-                pkgs.quarto
-                pkgs.poetry
-            ];
-            shellHook = ''
-                ${pkgs.poetry}/bin/poetry env use 3.11
-            '';
+  inputs.flake-utils.url = "github:numtide/flake-utils";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+  inputs.poetry2nix = {
+    url = "github:nix-community/poetry2nix";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
+  outputs = { self, nixpkgs, flake-utils, poetry2nix }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        # see https://github.com/nix-community/poetry2nix/tree/master#api for more functions and examples.
+        inherit (poetry2nix.legacyPackages.${system}) mkPoetryApplication;
+        pkgs = nixpkgs.legacyPackages.${system};
+	pythonEnv = pkgs.poetry2nix.mkPoetryEnv {
+   	  projectDir = ./.;
+  	};
+      in
+      {
+        packages = {
+          myapp = mkPoetryApplication { projectDir = self; };
+          default = self.packages.${system}.myapp;
         };
 
-        packages.${system}.main = pkgs.stdenv.mkDerivation rec{
-            name = "main";
-            src = ./.;
-            nativeBuildInputs = with pkgs; [ 
-                pkgs.quarto
-                pkgs.poetry
-            ];
-            shellHook = ''
-                ${pkgs.poetry}/bin/poetry env use 3.11
-            '';
-            buildPhase = ''
-                ${pkgs.poetry}/bin/poetry install
-            '';
-            installPhase = ''
-                ${pkgs.quarto}/bin/quarto render"
-            '';
+        devShells.default = pkgs.mkShell {
+	  buildInputs = [
+		  pkgs.poetry
+		  pythonEnv
+	  ];
         };
-    };
+      });
 }
-

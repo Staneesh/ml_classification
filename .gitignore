@@ -1,2 +1,5 @@
 .quarto
 _output
+
+/.quarto/
+env/

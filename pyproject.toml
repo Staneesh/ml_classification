@@ -1,14 +1,14 @@
 [tool.poetry]
-name = "ml-classification"
+name = "whatever"
 version = "0.1.0"
 description = ""
 authors = ["Staneesh <blkreasons@outlook.com>"]
 readme = "README.md"
-packages = [{include = "ml_classification"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
-quarto = "^0.1.0"
+python = ">=3.10,<3.13"
+numpy = "^1.26.0"
+pandas = "^2.1.1"
 
 
 [build-system]
