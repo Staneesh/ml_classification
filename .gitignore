@@ -3,3 +3,6 @@ _output
 
 /.quarto/
 env/
+main_files
+quarto-1.3.450-linux-amd64.deb
+.ipynb_checkpoints/
