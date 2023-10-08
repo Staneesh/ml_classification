@@ -1,1 +1,0 @@
-podman run --gpus all --runtime nvidia -p 8888:8888 -it -v $(pwd):/ml_classification:z -v /home/stanisz/wd4own/:/wd4own ml_classification-docker:latest bash

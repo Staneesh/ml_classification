@@ -1,2 +1,0 @@
-podman build --tag ml_classification-docker .
-
