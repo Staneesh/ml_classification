@@ -58,17 +58,10 @@
 			copyToRoot = pkgs.buildEnv {
 				name = "image-root";
 				paths = [ 
-#					pkgs.coreutils 
-#					pkgs.util-linux 
-#					pkgs.python38 
-#					pkgs.python38Packages.pip 
-#					pkgs.python38Packages.numpy 
-#					pkgs.python38Packages.pandas 
 					requirements 
 					setup
 					pkgs.dockerTools.binSh
 				];
-#				pathsToLink = [ "/bin" "/usr" ];
 			};			
 
 			config = {
@@ -80,9 +73,6 @@
 				Cmd = [
 					"/bin/sh"
 				];
-				Volumes = {
-					"output" = {};
-				};
 			};
 	    	};
 	};
